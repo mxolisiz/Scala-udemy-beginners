@@ -1,8 +1,10 @@
 package playground
 
+import java.util.Calendar
+
 object ScalaPlayground extends App {
 
-  val kafkatopicName: String = "topic1";
+  val kafkaTopicName: String = "topic1";
   var isInitialized: Boolean = false;
 
   val aCodeBlock = {
@@ -10,12 +12,23 @@ object ScalaPlayground extends App {
     if (isInitialized) "Positive." else "Negative.";
   }
 
-  ConfigureTopic(kafkatopicName, false)
+  ConfigureTopic(kafkaTopicName, false)
 
-  println(s"$kafkatopicName Is currently running? $aCodeBlock, Is initialized? $isInitialized");
+  println(s"$kafkaTopicName Is currently running? $aCodeBlock, Is initialized? $isInitialized");
+  println(FactorialRecursive(4))
 
 
-  def FunctionNoParameters(): Int = kafkatopicName.length();
+  def TestForHadoopJobs():Unit= {
+    val now = Calendar.getInstance()
+    val currentHour = now.get(Calendar.HOUR_OF_DAY)
+    val currentMinute = now.get(Calendar.MINUTE)
+    val cuttOffHour = (currentHour)*60 + currentMinute + 25//windowMinute.toInt
+    var presentHour = (currentHour)*60 + currentMinute
+    println(s"$presentHour")
+  }
+
+
+  def FunctionNoParameters(): Int = kafkaTopicName.length();
 
   def ConfigureTopic(topicName: String, initKafka: Boolean): Boolean = {
 
@@ -43,17 +56,18 @@ object ScalaPlayground extends App {
   def OutPutKafkaTopicDetails(TopicName: String): String = s"Topic name: $TopicName, topic name length: " +
     TopicName.length();
 
-  def FactorialFunction(numberToUse: Int, factorToUse: Int): Int = numberToUse * factorToUse;
-
-  def FactorialFunctionRecursive(numberToUse: Int): Int = {
-    if (numberToUse <= 0) 1
-    else numberToUse * FactorialFunctionRecursive(numberToUse - 1);
+  def FactorialRecursive(n:Int):Int= {
+    if (n <= 0) 1
+    else {
+      n * FactorialRecursive(n - 1)
+    }
   }
 
-  def FibonacciFunction(currentNumber: Int): Int = {
-    if (currentNumber <= 2) return 1;
+
+  def FibonacciFunction(num: Int): Int = {
+    if (num <= 2) return 1;
     else {
-      FibonacciFunction(currentNumber - 1) + FibonacciFunction(currentNumber - 2);
+      FibonacciFunction(num - 1) + FibonacciFunction(num - 2);
     }
   }
 
