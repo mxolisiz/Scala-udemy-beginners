@@ -44,7 +44,7 @@ object ScalaPlayground extends App {
   }
 
 
-  //instead of using a loop, AVOID LOOPS !!!! in functional programming, Use a recursive functions
+  //instead of using a loop, AVOID LOOPS !!!! in functional programming, Use recursive functions
   def ARepeatedFunction(stringValue: String, counter: Int): String = {
     if (counter == 1) stringValue
     else stringValue + ARepeatedFunction(stringValue, counter - 1);
